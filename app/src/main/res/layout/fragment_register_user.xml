@@ -1,14 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Flujocamera.RegisterUserFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/gradiand_back"
+        tools:ignore="MissingClass">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDatos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/card_radius_top"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutCalle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCalle"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Calle" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutNumero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCalle"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutCalle"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCalle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNum"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Numero" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutColonia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCalle"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutCalle"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumero">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtColonia"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Colonia" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutDelMun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCalle"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutCalle"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumero">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtDelMun"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Delegacion/Municipio" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEstado"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCalle"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutCalle"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutColonia">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEstado"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Estado" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutCP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCalle"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutCalle"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEstado">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCP"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="CP" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/btnInfo"
+                style="@style/button_rounded_fixi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="Info"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutCP" />
+
+            <Button
+                android:id="@+id/btnCamera"
+                style="@style/button_rounded_fixi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:text="Foto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCP" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutInfo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/card_radius_top"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNombre"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtApellido"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Apellido Paterno" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCorreo"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo Electronico"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtNumero"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Fecha de nacimiento"
+                    android:inputType="date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCont"
+                    style="@style/fixi_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Apellido Materno" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnDatos"
+                style="@style/button_rounded_fixi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:text="Datos"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
+                app:layout_constraintStart_toStartOf="@+id/textInputLayout6" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

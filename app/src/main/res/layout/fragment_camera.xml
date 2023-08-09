@@ -1,15 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Flujocamera.RegisterUserFragment">
+    tools:context=".Flujocamera.CameraFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/id_txt"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_fragment" />
+        android:layout_height="match_parent">
 
+        <!-- Vista previa de la cámara -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewCamera"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Cuadro para el rostro -->
+        <View
+            android:id="@+id/face_box"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/face_box"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible" />
+
+        <!-- Botón de cámara -->
+        <ImageButton
+            android:id="@+id/btn_camera"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_camera"
+            android:contentDescription="photo"
+            android:elevation="2dp"
+            android:src="@drawable/camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_centerline" />
+
+        <!-- Botón de cambio de cámara -->
+        <ImageButton
+            android:id="@+id/BtnreturnCam"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/btn_camera"
+            android:contentDescription="camera"
+            android:src="@drawable/flip_camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/vertical_centerline" />
+
+        <!-- Línea guía vertical para centrar -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_centerline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".50" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

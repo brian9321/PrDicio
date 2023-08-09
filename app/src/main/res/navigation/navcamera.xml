@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/navcamera">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navcamera"
+    app:startDestination="@id/registerUserFragment">
 
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.fotoapp.Flujocamera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/registerUserFragment"
+        android:name="com.example.fotoapp.Flujocamera.RegisterUserFragment"
+        android:label="fragment_register_user"
+        tools:layout="@layout/fragment_register_user" >
+        <action
+            android:id="@+id/action_registerUserFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_registerUserFragment_to_viewUsersFragment"
+            app:destination="@id/viewUsersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewUsersFragment"
+        android:name="com.example.fotoapp.Flujocamera.ViewUsersFragment"
+        android:label="fragment_view_users"
+        tools:layout="@layout/fragment_view_users" />
 </navigation>

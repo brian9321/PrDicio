@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="purple_200">#03DAC5</color>
+    <color name="purple_500">#479BC1</color>
+    <color name="purple_700">#03A9F4</color>
+    <color name="teal_200">#40C4FF</color>
+    <color name="teal_700">#0381BA</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimary">#2D9CCE</color>
+    <color name="colorPrimary2">#5C7190</color>
+    <color name="colorPrimary3">#1E83B1</color>
+    <color name="colorPrimary4">#F6C25D</color>
+    <color name="colorPrimary5">#2270AE</color>
+    <color name="colorPrimary6">#B34BC5D5</color>
+    <color name="colorPrimaryDark">#196BAC</color>
+    <color name="colorAccent">#3EBEF8</color>
+    <color name="colorDisabled">#CACACA</color>
+    <color name="button_color_background">@color/colorPrimary</color>
+    <color name="button_color_background_hover">#3899C5</color>
+    <color name="text_subtitle_color">#8C8C8C</color>
+    <color name="text_title_color">#4A4A4A</color>
+    <color name="input_text_title_color">#8C8C8C</color>
+    <color name="button_background_color_invert">#EEEEF2</color>
+    <color name="text_regex_validator_success">#88DFB5</color>
+    <color name="button_payment_color">#EEEEF2</color>
+    <color name="button_payment_color_selected">#5C7190</color>
+    <color name="button_line_separator_nav_drawer">#EEEEF2</color>
+    <color name="mock_gray">#D8D8D8</color>
 </resources>
