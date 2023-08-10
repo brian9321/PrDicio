@@ -73,7 +73,7 @@
                 app:boxBackgroundMode="none"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCalle"
                 app:layout_constraintStart_toStartOf="@+id/textInputLayoutCalle"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumero">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDelMun">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtColonia"
@@ -243,7 +243,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtNumero"
+                    android:id="@+id/txtFecha"
                     style="@style/fixi_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -261,7 +261,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtCont"
+                    android:id="@+id/txtApellidoMat"
                     style="@style/fixi_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

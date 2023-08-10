@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.fotoapp.databinding.FragmentCameraBinding
-import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import java.io.File
 import java.util.concurrent.Executor
@@ -29,11 +28,19 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.camera.core.ImageCaptureException
+import androidx.lifecycle.ViewModelProvider
+import com.example.fotoapp.Flujocamera.Factory.UserViewModelFactory
+import com.example.fotoapp.Flujocamera.ViewModel.UserViewModel
 import com.example.fotoapp.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.Executors
-class MainActivity : AppCompatActivity() {
+
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.android.x.kodein
+import org.kodein.di.generic.instance
+class MainActivity : AppCompatActivity(), KodeinAware {
 
 /*
     private lateinit var broadcastManager: LocalBroadcastManager
@@ -53,9 +60,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
 */
     private lateinit var viewBinding: ActivityMainBinding
+    override val kodein by kodein()
+    private lateinit var viewModel: UserViewModel
+    private val factory: UserViewModelFactory by instance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this, factory).get(UserViewModel::class.java)
         setContentView(viewBinding.root)
 /*
         if (allPermissionsGranted()) {

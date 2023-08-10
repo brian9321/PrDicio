@@ -1,14 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Flujocamera.ViewUsersFragment">
+    tools:context=".Flujocamera.ViewUsersFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/gradiand_back"
+        >
 
+        <ImageView
+            android:id="@+id/imvFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@android:drawable/gallery_thumb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/card_radius_top"
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imvFoto">
+
+            <TextView
+                android:id="@+id/txvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="name"
+                android:textColor="@color/button_color_background_hover"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvEdad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="0"
+                android:textColor="@color/button_color_background_hover"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/txvName"
+                app:layout_constraintStart_toStartOf="@+id/txvName"
+                app:layout_constraintTop_toBottomOf="@+id/txvName" />
+
+            <TextView
+                android:id="@+id/tvFechaNa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="00/00/0000"
+                android:textColor="@color/button_color_background_hover"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tvEdad"
+                app:layout_constraintStart_toStartOf="@+id/tvEdad"
+                app:layout_constraintTop_toBottomOf="@+id/tvEdad" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="email@gmail.com"
+                android:textColor="@color/button_color_background_hover"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tvFechaNa"
+                app:layout_constraintStart_toStartOf="@+id/tvFechaNa"
+                app:layout_constraintTop_toBottomOf="@+id/tvFechaNa" />
+
+            <TextView
+                android:id="@+id/tvDireccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="dir"
+                android:textColor="@color/button_color_background_hover"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tvEmail"
+                app:layout_constraintStart_toStartOf="@+id/tvEmail"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+            <TextView
+                android:id="@+id/tvCp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="00000"
+                android:textColor="@color/button_color_background_hover"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/tvDireccion"
+                app:layout_constraintStart_toStartOf="@+id/tvDireccion"
+                app:layout_constraintTop_toBottomOf="@+id/tvDireccion" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:src="@drawable/check"
+                android:contentDescription="Enviar usuario"
+                app:backgroundTint="@color/button_color_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

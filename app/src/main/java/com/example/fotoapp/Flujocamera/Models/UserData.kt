@@ -7,14 +7,14 @@ data class DatosPersonales(
     val edad: Int,
     val email: String,
     val fechaNac: String,
-    val datos: Direccion
+    val datos: String // Cambiado a String para almacenar los datos como JSON
 )
 
 data class Direccion(
     val calle: String,
     val numero: String,
     val colonia: String,
-    val delegacionMunicipio: String,
+    val delegacion: String,
     val estado: String,
     val cp: String,
     val imagen: String

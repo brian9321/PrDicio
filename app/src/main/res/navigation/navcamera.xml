@@ -9,7 +9,11 @@
         android:id="@+id/cameraFragment"
         android:name="com.example.fotoapp.Flujocamera.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_viewUsersFragment"
+            app:destination="@id/viewUsersFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerUserFragment"
         android:name="com.example.fotoapp.Flujocamera.RegisterUserFragment"
@@ -17,10 +21,8 @@
         tools:layout="@layout/fragment_register_user" >
         <action
             android:id="@+id/action_registerUserFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-        <action
-            android:id="@+id/action_registerUserFragment_to_viewUsersFragment"
-            app:destination="@id/viewUsersFragment" />
+            app:destination="@id/cameraFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/viewUsersFragment"

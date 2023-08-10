@@ -1,5 +1,6 @@
 package com.example.fotoapp.Flujocamera.Api
 import android.service.autofill.UserData
+import com.example.fotoapp.Flujocamera.Models.DatosPersonales
 import com.example.fotoapp.models.ResponseEmpty
 import com.example.fotoapp.network.AppConstants
 import com.example.fotoapp.network.NetworkConnectionInterceptor
@@ -14,12 +15,12 @@ import retrofit2.http.POST
 interface WSUser {
     @POST("sec_dev_interview")
     @Headers(
-        "Content-Type: application/json; charset=utf-8",
+        "Content-Type: application/json",
         "Host: api.devdicio.net",
         "xc-token: J38b4XQNLErVatKIh4oP1jw9e_wYWkS86Y04TMNP"
     )
     suspend fun createUser(
-        @Body acc: UserData
+        @Body acc: DatosPersonales
     ): Response<ResponseEmpty>
 
     companion object{
