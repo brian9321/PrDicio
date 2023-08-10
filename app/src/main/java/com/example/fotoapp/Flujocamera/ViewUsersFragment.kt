@@ -70,8 +70,8 @@ class ViewUsersFragment : Fragment(), KodeinAware {
             viewModel.actualizarDataGson()
             val datosPersonales = viewModel.datosPersonales.value
             Log.e("DATOS PR FINAL", "Datos guardados: $datosPersonales")
-            view?.findNavController()?.popBackStack(R.id.listUsersFragment, false)
-            //viewModel.sendUser()
+            //view?.findNavController()?.popBackStack(R.id.listUsersFragment, false)
+            viewModel.sendUser()
 
         }
 
