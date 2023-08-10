@@ -11,13 +11,17 @@ FotoApp es una aplicación móvil que te permite capturar fotos, procesarlas y e
 - Visualizacion de los datos
 
 # Apk
+
 El APK lo puedes encontrar en: [FotoApp](https://github.com/brian9321/PrDicio/tree/master/files).
+
 ## Capturas de Pantalla
 
+![Flujo NavigationController](screenshots/flujo.png)
 ![Captura de Pantalla 1](screenshots/screenshot1.jpeg)
 ![Captura de Pantalla 2](screenshots/screenshot2.jpeg)
 ![Captura de Pantalla 3](screenshots/screenshot3.jpeg)
-![Flujo NavigationController](screenshots/flujo.png)
+![Captura de Pantalla 3](screenshots/screenshot4.jpeg)
+![Captura de Pantalla 3](screenshots/screenshot5.jpeg)
 
 ## Tecnologías Utilizadas
 
