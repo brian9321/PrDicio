@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
@@ -59,10 +60,162 @@ class RegisterUserFragment : Fragment(), KodeinAware {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnOnClick(view)
-        valData()
+
+        viewBinding.txtNombre.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val isValid = s?.matches("[a-zA-Z ]+".toRegex()) == true && s.isNotEmpty()
+                viewBinding.txtNombre.error = if (isValid) null else "Ingresa un nombre válido"
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+
+        viewBinding.txtNombre.setupTextWatcher("Ingresa un nombre válido") { text ->
+            isTextValid(text)
+        }
+
+        viewBinding.txtApellido.setupTextWatcher("Ingresa un apellido válido") { text ->
+            isTextValid(text)
+        }
+
+        viewBinding.txtCorreo.setupEmailValidator()
+
+        viewBinding.txtNum.setupNumberValidator()
+        viewBinding.txtCP.setupNumberValidator()
+        viewBinding.txtCalle.setupTextWatcher("Ingresa una calle válida") { text ->
+            isTextValid(text)
+        }
+        viewBinding.txtColonia.setupTextWatcher("Ingresa una colonia válida") { text ->
+            isTextEmpty(text)
+        }
+        viewBinding.txtDelMun.setupTextWatcher("Ingresa una colonia válida") { text ->
+            isTextEmpty(text)
+        }
+
+        viewBinding.txtEstado.setupTextWatcher("Ingresa una calle válida") { text ->
+            isTextValid(text)
+        }
+        viewBinding.txtFecha.setupDateValidator()
+
+        viewBinding.txtNombre.addTextChangedListener { updateButtonState() }
+        viewBinding.txtApellido.addTextChangedListener { updateButtonState() }
+        viewBinding.txtApellidoMat.addTextChangedListener { updateButtonState() }
+        viewBinding.txtCorreo.addTextChangedListener { updateButtonState() }
+        viewBinding.txtFecha.addTextChangedListener { updateButtonState() }
+
+        viewBinding.txtNum.addTextChangedListener { updateButtonFoto() }
+        viewBinding.txtCalle.addTextChangedListener { updateButtonFoto() }
+        viewBinding.txtEstado.addTextChangedListener { updateButtonFoto() }
+        viewBinding.txtColonia.addTextChangedListener { updateButtonFoto() }
+        viewBinding.txtCP.addTextChangedListener { updateButtonFoto() }
+        viewBinding.txtDelMun.addTextChangedListener { updateButtonFoto() }
+    }
+    fun TextInputEditText.setupDateValidator() {
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No necesitas hacer nada aquí
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Verifica si el texto es una fecha válida en el formato AAAA-MM-DD
+                val isValid = s?.matches("\\d{4}-\\d{2}-\\d{2}".toRegex()) == true
+
+                // Activa o desactiva la validación según corresponda
+                error = if (isValid) null else "Ingresa una fecha válida (AAAA-MM-DD)"
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No necesitas hacer nada aquí
+            }
+        })
+    }
+    fun TextInputEditText.setupTextWatcher(errorMessage: String, validation: (CharSequence?) -> Boolean) {
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val isValid = validation(s)
+                error = if (isValid) null else errorMessage
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+    fun TextInputEditText.setupNumberValidator() {
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val isValid = s?.matches("[0-9]+".toRegex()) == true
+                error = if (isValid) null else "Ingresa solo números"
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+    fun TextInputEditText.setupEmailValidator() {
+        addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val isValid = android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches()
+                error = if (isValid) null else "Ingresa un correo electrónico válido"
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+    }
+    fun updateButtonState() {
+        viewBinding.btnDatos.isEnabled = areFieldsValid()
     }
 
+    fun updateButtonFoto() {
+        viewBinding.btnCamera.isEnabled = areFieldsValidData()
+    }
+    fun areFieldsValid(): Boolean {
+        val nombreValid = viewBinding.txtNombre.text?.matches("[a-zA-Z ]+".toRegex()) == true && viewBinding.txtNombre.text?.isNotEmpty() == true
+        val apellidoValid = viewBinding.txtApellido.text?.matches("[a-zA-Z ]+".toRegex()) == true && viewBinding.txtApellido.text?.isNotEmpty() == true
+        val apellidoMatValid = viewBinding.txtApellidoMat.text?.matches("[a-zA-Z ]+".toRegex()) == true && viewBinding.txtApellidoMat.text?.isNotEmpty() == true
+        val correoValid = viewBinding.txtCorreo.text?.matches("[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+".toRegex()) == true && viewBinding.txtCorreo.text?.isNotEmpty() == true
+        //val numeroValid = viewBinding.txtNum.text?.matches("\\d+".toRegex()) == true && viewBinding.txtNum.text?.isNotEmpty() == true
+        val fechaValid = viewBinding.txtFecha.text?.matches("\\d{4}-\\d{2}-\\d{2}".toRegex()) == true
 
+        return nombreValid && apellidoValid && correoValid  && fechaValid && apellidoMatValid
+    }
+
+    fun areFieldsValidData(): Boolean {
+        val calleValid = viewBinding.txtCalle.text?.matches("[a-zA-Z ]+".toRegex()) == true && viewBinding.txtCalle.text?.isNotEmpty() == true
+        val numeroValid = viewBinding.txtNum.text?.matches("\\d+".toRegex()) == true && viewBinding.txtNum.text?.isNotEmpty() == true
+        val estadoValid = viewBinding.txtEstado.text?.matches("[a-zA-Z ]+".toRegex()) == true && viewBinding.txtEstado.text?.isNotEmpty() == true
+        val coloniaValid =  viewBinding.txtColonia.text?.isNotEmpty() == true
+        val delValid =  viewBinding.txtDelMun.text?.isNotEmpty() == true
+        val cpValid = viewBinding.txtCP.text?.matches("\\d+".toRegex()) == true && viewBinding.txtCP.text?.isNotEmpty() == true
+
+        Log.e("calleValid",calleValid.toString())
+        Log.e("numeroValid",numeroValid.toString())
+        Log.e("estadoValid",estadoValid.toString())
+        Log.e("coloniaValid",coloniaValid.toString())
+        Log.e("delValid",delValid.toString())
+        Log.e("cpValid",cpValid.toString())
+        return calleValid && numeroValid && coloniaValid  && delValid && estadoValid && cpValid
+    }
+    fun isTextEmpty(text: CharSequence?): Boolean {
+        return text!!.isNotEmpty()
+    }
+    fun isTextValid(text: CharSequence?): Boolean {
+        return text?.matches("[a-zA-Z ]+".toRegex()) == true && text.isNotEmpty()
+    }
     fun btnOnClick(view: View){
 
         viewBinding.btnDatos.setOnClickListener {
@@ -75,91 +228,11 @@ class RegisterUserFragment : Fragment(), KodeinAware {
 
         viewBinding.btnCamera.setOnClickListener {
             sendData()
-            //view.findNavController().navigate(R.id.action_registerUserFragment_to_cameraFragment)
-        }
-    }
-    private fun setupEditTextValidation(
-        editText: TextInputEditText,
-        validation: (String) -> Boolean,
-        errorMessage: String
-    ) {
-        editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val input = s.toString().trim()
-                if (validation(input)) {
-                    editText.error = errorMessage
-                } else {
-                    editText.error = null
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-    }
-
-    private fun EditTextFocusChangeValidation(
-        editText: TextInputEditText,
-        validation: (String) -> Boolean,
-        errorMessage: String
-    ) {
-        editText.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                val input = editText.text.toString().trim()
-                if (validation(input)) {
-                    editText.error = errorMessage
-                } else {
-                    editText.setError(null)
-                }
-            } else {
-                editText.setError(null)
-            }
         }
     }
 
-    fun valData(){
-        requiredDataMessage(viewBinding.txtNombre)
-        requiredDataMessage(viewBinding.txtApellido)
-        requiredDataMessage(viewBinding.txtApellidoMat)
-        //EditTextValidationEmail(viewBinding.txtCorreo)
-        requiredDataMessage(viewBinding.txtFecha)
-        requiredDataMessage(viewBinding.txtCalle)
-        requiredDataMessage(viewBinding.txtNum)
-        requiredDataMessage(viewBinding.txtDelMun)
-        requiredDataMessage(viewBinding.txtEstado)
-        requiredDataMessage(viewBinding.txtCP)
-
-        viewBinding.txtCorreo.setOnEditorActionListener { edit, i, _ ->
-            if (i == EditorInfo.IME_ACTION_DONE) {
-                Log.e("EDITAR", "EMAIL")
-            }
-            false
-        }
-    }
-    private fun isValidEmail(email: String): Boolean {
-        val pattern = Patterns.EMAIL_ADDRESS
-        return pattern.matcher(email).matches()
-    }
-    fun EditTextValidationEmail(editText: TextInputEditText){
-
-        EditTextFocusChangeValidation(
-            editText,
-            { input -> editText.text!!.trim().isNotEmpty()
-                    && Patterns.EMAIL_ADDRESS.matcher(editText.text!!.trim())
-                .matches()},
-            "Correo electrónico inválido"
-        )
-    }
-    fun requiredDataMessage(editText: TextInputEditText){
-        EditTextFocusChangeValidation(
-            editText,
-            { input -> input.isEmpty() }, // Aquí define tu validación para el enfoque
-            "Este campo es requerido"
-        )
-    }
     private fun sendData(){
-        /*
+
         val direccion = Direccion(
         viewBinding.txtCalle.text.toString().trim(),
         viewBinding.txtNum.text.toString().trim(),
@@ -176,9 +249,9 @@ class RegisterUserFragment : Fragment(), KodeinAware {
             calcularEdad(viewBinding.txtFecha.text.toString().trim()),
             viewBinding.txtCorreo.text.toString().trim(),
             viewBinding.txtFecha.text.toString().trim(),
-            direccion
+            Gson().toJson(direccion)
         )
-*/
+/*
         val direccionpr = Direccion(
             "sol",
             "12",
@@ -196,14 +269,14 @@ class RegisterUserFragment : Fragment(), KodeinAware {
             "brayan932@gmail.com",
             "30/07/1997",
             Gson().toJson(direccionpr)
-        )
+        )*/
 
         lifecycleScope.launch(Dispatchers.Main + SupervisorJob()){
-            viewModel.setDatosPersonales(userpr)
+            viewModel.setDatosPersonales(user)
         }
 
         viewModel.datosPersonales.observe(viewLifecycleOwner) {datosPersonales ->
-            viewModel.setDatosDireccion(direccionpr)
+            viewModel.setDatosDireccion(direccion)
         }
 
         viewModel.datosDireccion.observe(viewLifecycleOwner) {datosDireccion ->
@@ -220,7 +293,7 @@ class RegisterUserFragment : Fragment(), KodeinAware {
     }
 
     fun calcularEdad(fechaNacimiento: String): Int {
-        val formato = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val formato = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val fechaNac = formato.parse(fechaNacimiento)
         val fechaActual = Calendar.getInstance().time
 
@@ -229,4 +302,5 @@ class RegisterUserFragment : Fragment(), KodeinAware {
 
         return edadMilisegundos.toInt()
     }
+
 }

@@ -9,9 +9,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.fotoapp.Flujocamera.Factory.UserViewModelFactory
 import com.example.fotoapp.Flujocamera.ViewModel.UserViewModel
 import com.example.fotoapp.R
@@ -56,6 +59,10 @@ class ViewUsersFragment : Fragment(), KodeinAware {
         binding.fabEditar.setOnClickListener{
             updateData()
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            showLoading(isLoading)
+        }
     }
 
     fun updateData(){
@@ -63,22 +70,37 @@ class ViewUsersFragment : Fragment(), KodeinAware {
             viewModel.actualizarDataGson()
             val datosPersonales = viewModel.datosPersonales.value
             Log.e("DATOS PR FINAL", "Datos guardados: $datosPersonales")
-
-            viewModel.sendUser()
-        }
-    }
-    fun sendUser(){
-        lifecycleScope.launch(Dispatchers.Main + SupervisorJob()){
+            view?.findNavController()?.popBackStack(R.id.listUsersFragment, false)
+            //viewModel.sendUser()
 
         }
-    }
 
+        viewModel.send_User.observe(viewLifecycleOwner, {
+            it.getContentIfNotHandled()?.let { user ->
+                if(user != null){
+                    Log.e("ID DEL USUARIO", user.id.toString())
+                    Toast.makeText(requireContext(), "Registro Agregado id: " + user.id.toString(), Toast.LENGTH_SHORT).show()
+                    view?.findNavController()?.popBackStack(R.id.listUsersFragment, false)
+                }
+            }
+        })
+    }
     fun imageTransform(){
         val img = viewModel.image.value
         val imageData = Base64.decode(img, Base64.DEFAULT)
         val bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.size)
         binding.imvFoto.setImageBitmap(bitmap)
 
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.loadingOverlay.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.loadingOverlay.visibility = View.GONE
+            binding.progressBar.visibility = View.GONE
+        }
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

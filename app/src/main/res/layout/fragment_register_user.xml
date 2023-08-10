@@ -17,15 +17,14 @@
             android:id="@+id/layoutDatos"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/card_radius_top"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:visibility="gone">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -153,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
+                android:enabled="false"
                 android:text="Foto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayoutCP" />
@@ -164,15 +164,14 @@
             android:id="@+id/layoutInfo"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/card_radius_top"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -274,6 +273,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
+                android:enabled="false"
                 android:text="Datos"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
@@ -281,6 +281,20 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Registrar Usuario"
+            android:textColor="#FFFFFF"
+            android:textColorLink="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,3 +19,19 @@ data class Direccion(
     val cp: String,
     val imagen: String
 )
+
+data class listOfUsers(
+    val listOfAccountsToTrade: List<ResponseData>? = null
+)
+data class ResponseData(
+    val id: Int,
+    val nombre: String?,
+    val apellidoPaterno: String?,
+    val apellidoMaterno: String?,
+    val edad: Int?,
+    val email: String?,
+    val fechaNac: String?,
+    val datos: Direccion?
+)
+
+

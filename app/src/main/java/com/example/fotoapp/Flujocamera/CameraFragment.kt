@@ -78,14 +78,9 @@ class CameraFragment : Fragment(), KodeinAware {
         cameraExecutor = Executors.newSingleThreadExecutor()
         imageCapture = ImageCapture.Builder().build()
 
-        if (allPermissionsGranted()) {
-            startCamera()
-        } else {
-            requestPermissions(
-                REQUIRED_PERMISSIONS,
-                REQUEST_CODE_PERMISSIONS
-            )
-        }
+        startCamera()
+
+
         viewBinding.BtnreturnCam.setOnClickListener {
             currentCamera = if (currentCamera == CameraSelector.DEFAULT_BACK_CAMERA) {
                 CameraSelector.DEFAULT_FRONT_CAMERA
@@ -105,12 +100,6 @@ class CameraFragment : Fragment(), KodeinAware {
         return viewBinding.root
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(
-            requireContext(),
-            it
-        ) == PackageManager.PERMISSION_GRANTED
-    }
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
 

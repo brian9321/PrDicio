@@ -121,4 +121,22 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Vista semitransparente para bloquear interacción -->
+    <View
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
+
+    <!-- ProgressBar centrado en la pantalla -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/button_color_background"
+        android:visibility="gone" />
 </FrameLayout>

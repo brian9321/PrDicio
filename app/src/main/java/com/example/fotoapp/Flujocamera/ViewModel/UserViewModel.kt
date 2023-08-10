@@ -5,8 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.fotoapp.Flujocamera.Models.DatosPersonales
 import com.example.fotoapp.Flujocamera.Models.Direccion
+import com.example.fotoapp.Flujocamera.Models.ResponseData
+import com.example.fotoapp.Flujocamera.Models.listOfUsers
 import com.example.fotoapp.Flujocamera.Repository.UserRepository
-import com.example.fotoapp.models.ResponseEmpty
 import com.example.fotoapp.utils.ApiException
 import com.example.fotoapp.utils.Event
 import com.example.fotoapp.utils.NoInternetException
@@ -25,10 +26,22 @@ class UserViewModel (private val repository: UserRepository
     private val _datosDireccion = MutableLiveData<Direccion>()
     val datosDireccion: LiveData<Direccion> get() = _datosDireccion
 
-    val send_User = MutableLiveData<Event<ResponseEmpty>>()
+    val send_User = MutableLiveData<Event<ResponseData>>()
 
     val _image = MutableLiveData("")
     val image: LiveData<String> get() = _image
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.value = isLoading
+    }
+
+    fun resetLoading() {
+        _isLoading.value = false
+    }
     fun setDatosPersonales(datos: DatosPersonales) {
         _datosPersonales.value = datos
     }
@@ -50,27 +63,53 @@ class UserViewModel (private val repository: UserRepository
         val direccionActualizada = datosActual.copy(datos = Gson().toJson(datosDireccion.value))
         _datosPersonales.value = direccionActualizada
     }
-
+    val getUsers = MutableLiveData<Event<List<ResponseData>>>()
     suspend fun sendUser(){
         try {
+            setLoading(true)
             withContext(Dispatchers.IO) {
                 send_User.postValue(Event(repository.createUser(datosPersonales.value!!)))
             }
         } catch (e: ApiException) {
             Log.e("error", "ApiException")
-            isBusy.postValue(Event(false))
+            resetLoading()
             errorMessage.value = Event(e.message!!)
             println(e.message)
         } catch (e: NoInternetException) {
             Log.e("error", "NoInternetException")
-            isBusy.postValue(Event(false))
+            resetLoading()
             errorMessage.value = Event(e.message!!)
             println(e.message)
         } catch (e: SocketTimeoutException) {
             Log.e("error", "SocketTimeoutException")
-            isBusy.postValue(Event(false))
+            resetLoading()
             errorMessage.value =
                 Event("Tuvimos un problema, intente de nuevo mas tarde.")
+        } finally {
+            resetLoading()
+        }
+    }
+
+    suspend fun getUsers(){
+        try {
+            setLoading(true)
+            withContext(Dispatchers.IO) {
+                getUsers.postValue(Event(repository.getUsers()))
+            }
+        } catch (e: ApiException) {
+            resetLoading()
+            errorMessage.value = Event(e.message!!)
+            println(e.message)
+        } catch (e: NoInternetException) {
+            resetLoading()
+            errorMessage.value = Event(e.message!!)
+            println(e.message)
+        } catch (e: SocketTimeoutException) {
+            resetLoading()
+            errorMessage.value =
+                Event("Tuvimos un problema, intente de nuevo mas tarde.")
+        }finally {
+            resetLoading()
         }
     }
 
